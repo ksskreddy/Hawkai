@@ -3,7 +3,7 @@ import multiprocessing as mp
 import time
 from ..messages import message
 from ..messages import messageutils
-from .main import elect_leader
+from .__main__ import elect_leader
 
 
 def leader_elect_handler(neighbour_file,
@@ -67,14 +67,14 @@ def leader_elect_handler(neighbour_file,
 
 		#sending new leader info to its neighbours
 		neighbour_list = parse_neighbour_file(neighbour_file)
-    	for ip in neighbour_list:
-	        messageutils.make_and_send_message(
-	                msg_type='LEADER_ELECT',
-	                content=content,
-	                file_path=None,
-	                to=ip,
-	                msg_socket=None,
-	                port=network_params.CLIENT_SEND_PORT)
+		for ip in neighbour_list:
+			messageutils.make_and_send_message(
+			        msg_type='LEADER_ELECT',
+			        content=content,
+			        file_path=None,
+			        to=ip,
+			        msg_socket=None,
+			        port=network_params.CLIENT_SEND_PORT)
 
 	return leader_id,leader_ip,parent_ip,leader_elect_acks
 

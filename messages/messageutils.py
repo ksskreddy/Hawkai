@@ -1,4 +1,12 @@
 from . import message
+from ..utils import networkparams
+from ..utils.networkparams import BUFFER_SIZE
+
+import io
+import pickle
+import psutil
+import socket
+import time
 
 def make_and_send_message(msg_type, content, file_path, to, msg_socket, port):
     """Construct a message object with given attributes & send to address
@@ -15,7 +23,7 @@ def make_and_send_message(msg_type, content, file_path, to, msg_socket, port):
     send_message(msg=msg, to=to, msg_socket=msg_socket, port=port)
 
 
-def send_message(msg, to, msg_socket=None, port=PORT):
+def send_message(msg, to, msg_socket=None, port=networkparams.CLIENT_RECV_PORT):
     """Sends binary/pickle of message object to receiver.
 
     :param msg: Message object with data of message to be sent
